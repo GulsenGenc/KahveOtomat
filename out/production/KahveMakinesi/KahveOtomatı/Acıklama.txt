@@ -1,0 +1,6 @@
+Projede Kullanılan OOP konsept elemanları ve daha fazlası;
+1->Inheritance
+2->Encapsulatıon
+3->Interface
+4->Try catch
+5->Mapler

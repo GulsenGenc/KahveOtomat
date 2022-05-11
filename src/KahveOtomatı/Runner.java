@@ -1,0 +1,9 @@
+package KahveOtomatı;
+
+import static KahveOtomatı.Islemler.start;
+
+public class Runner {
+    public static void main(String[] args) throws InterruptedException {
+        start();
+    }
+}
