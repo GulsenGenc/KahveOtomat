@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Islemler extends KahveBilgileri implements ToDoList  {
+public class Islemler extends KahveBilgileri implements ToDoList {
     static Scanner scan = new Scanner(System.in);
     static String hangiKahve = "";
-    static Map<String,KahveBilgileri> kahveBilgileriMap=new HashMap<>();
+    static Map<String, KahveBilgileri> kahveBilgileriMap = new HashMap<>();
+    static int totalFatura = 0;
 
     public static void start() throws InterruptedException {
         System.out.println("*****40YIL HATIR BIRAKAN MAKİNEYE HOŞGELDİNİZ*****\n");
@@ -50,10 +51,11 @@ public class Islemler extends KahveBilgileri implements ToDoList  {
     @Override
     public void beklet() throws InterruptedException {
         System.out.print(hangiKahve + " Hazırlanıyor");
-        for (int i = 1; i < 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             System.out.print(".");
             Thread.sleep(1500);
         }
+
         System.out.println("\nKahveniz Hazır .Afiyet olsun :)\n");
     }
 
@@ -65,7 +67,7 @@ public class Islemler extends KahveBilgileri implements ToDoList  {
     @Override
     public void sütEkle() throws InterruptedException {
         System.out.println("\nSüt eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız)");
-        String cevap = TryCatch.stringGiris();
+        String cevap = scan.next();
         if (cevap.equalsIgnoreCase("evet")) {
             System.out.print("Süt Ekleniyor");
             for (int i = 1; i <= 3; i++) {
@@ -85,7 +87,7 @@ public class Islemler extends KahveBilgileri implements ToDoList  {
     @Override
     public void sekerEkle() throws InterruptedException {
         System.out.println("Şeker eklememizi ister misiniz ? (Evet veya Hayır olarak cevaplayınız)");
-        String cevap = TryCatch.stringGiris();
+        String cevap = scan.next();
         if (cevap.equalsIgnoreCase("evet")) {
             System.out.println("Kaç küp şeker eklemesini istersiniz?\n");
             int seker = TryCatch.intGiris();
@@ -112,44 +114,45 @@ public class Islemler extends KahveBilgileri implements ToDoList  {
 
     @Override
     public void kahveBoyutuDuzenle() {
-        KahveBilgileri kahve=new KahveBilgileri();
+        KahveBilgileri kahve = new KahveBilgileri();
         System.out.println("Kahveniz Hangi boyutta Olsun?\n1-->Küçük \n2-->Orta \n3-->Büyük");
-        int secim=TryCatch.intGiris();
-        if (secim==1){
+        int secim = TryCatch.intGiris();
+        if (secim == 1) {
             kahve.setBoyut("Küçük");
             kahve.setFiyat(secim);
-            kahveBilgileriMap.put(hangiKahve,kahve);
-        } else if (secim==2){
+            kahveBilgileriMap.put(hangiKahve, kahve);
+        } else if (secim == 2) {
             kahve.setBoyut("Orta");
             kahve.setFiyat(secim);
-            kahveBilgileriMap.put(hangiKahve,kahve);
-        } else if(secim==3){
+            kahveBilgileriMap.put(hangiKahve, kahve);
+        } else if (secim == 3) {
             kahve.setBoyut("Büyük");
             kahve.setFiyat(secim);
-            kahveBilgileriMap.put(hangiKahve,kahve);
-        } else{
+            kahveBilgileriMap.put(hangiKahve, kahve);
+        } else {
             System.out.println("lütfen geçerli bir seçim yapınız");
             kahveBoyutuDuzenle();
         }
+        totalFatura+=kahve.getFiyat();
 
     }
 
     @Override
     public void faturala() throws InterruptedException {
-        System.out.println("Faturanız-->"+kahveBilgileriMap.get(hangiKahve).getFiyat());
-       while(true){
-           System.out.print("\nLütfen çıkış için 1'i başka bir kahve almak için 2'yi tuslayınız");
-           int secm= TryCatch.intGiris();
-           if (secm==1){
-               cıkıs();
-               break;
-           } else if(secm==2){
-               giris();
-               break;
-           } else{
-               System.out.println("lütfen geçerli bir seçim yapınız");
-           }
-       }
+        System.out.println("Faturanız-->" + totalFatura);
+        while (true) {
+            System.out.print("\nLütfen çıkış için 1'i başka bir kahve almak için 2'yi tuslayınız");
+            int secm = TryCatch.intGiris();
+            if (secm == 1) {
+                cıkıs();
+                break;
+            } else if (secm == 2) {
+                giris();
+                break;
+            } else {
+                System.out.println("lütfen geçerli bir seçim yapınız");
+            }
+        }
 
     }
 }

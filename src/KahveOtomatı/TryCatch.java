@@ -5,30 +5,16 @@ import java.util.Scanner;
 public class TryCatch {
     static Scanner scan = new Scanner(System.in);
 
-    public static String stringGiris() {
-        boolean flag = false;
-        String secim = "";
 
-        do {
-            System.out.println("Lütfen secim yapınız\n");
-            try {
-                secim = scan.next();
-            } catch (Exception e) {
-                System.out.println("Hatalı giriş yaptınız");
-                flag = true;
-                stringGiris();
-            }
-
-        } while (flag);
-        return secim;
-    }
 
     public static int intGiris() {
         int secim = 0;
         boolean flag = false;
 
       do {
-          if (flag)
+          if (flag==true){
+              scan.nextLine();
+          }
           System.out.println("Lütfen secim yapınız\n");
           try {
               secim = scan.nextInt();
@@ -36,6 +22,7 @@ public class TryCatch {
               break;
           } catch (Exception e) {
               System.out.println("Hatalı giriş yaptınız");
+              flag=true;
 
           }
       }while (flag);
