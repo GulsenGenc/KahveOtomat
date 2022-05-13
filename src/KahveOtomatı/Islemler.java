@@ -19,8 +19,8 @@ public class Islemler extends KahveBilgileri implements ToDoList {
     public static void giris() throws InterruptedException {
         Islemler obj = new Islemler();
         obj.listele();
-        int secim = TryCatch.intGiris();
-        switch (secim) {
+
+        switch (TryCatch.intGiris()) {
             case 1:
                 hangiKahve = "Türk Kahvesi";
                 obj.kahveBoyutuDuzenle();
@@ -44,6 +44,9 @@ public class Islemler extends KahveBilgileri implements ToDoList {
             case 4:
                 obj.cıkıs();
                 break;
+            default:
+                System.out.println("gecerli bir seçim yapınız");
+                giris();
         }
     }
 
